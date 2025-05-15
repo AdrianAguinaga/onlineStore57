@@ -1,18 +1,17 @@
-
-import './App.css'
-import Navbar from './components/Navbar'
-
+import "./App.css";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
 function App() {
   // This is the main component of the application
   return (
     <>
-    <Navbar />
-    <h1>Hello world from React.js (App.jsx)</h1>
-   
-    
+      <Navbar />
+      <Footer />
+      
+      
     </>
-  )
+  );
 }
 
-export default App
+export default App;

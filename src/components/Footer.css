@@ -1,0 +1,97 @@
+/* Footer.css */
+
+/*
+  Ensure your theme variables are accessible here.
+  If this file is processed separately, you might need to re-declare them
+  or import them if your setup allows.
+
+  :root {
+    --nevada-bg-sand: #f0e6d2;
+    --nevada-text-earth: #5d4037;
+    --nevada-accent-terracotta: #c67258;
+    --nevada-border-subtle: #dcd0b8; // Example, may not be used here
+
+    --transition-speed-fast: 0.2s;
+    --transition-speed-medium: 0.3s;
+    --transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --transition-timing-function-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275); // For more playful effects
+
+    // For text shadows using RGBA with CSS variables
+    --nevada-text-earth-rgb: 93, 64, 55;
+    --nevada-accent-terracotta-rgb: 198, 114, 88;
+  }
+*/
+
+.footer {
+  background-color: transparent; /* No distinct background fill */
+  color: var(--nevada-text-earth); /* Text color to contrast with page background */
+  padding: 2rem 2rem; /* Adjust padding as desired */
+  margin-top: 4rem; /* Space from main content */
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  border-top: 2px solid var(--nevada-accent-terracotta); /* Clear thematic separator */
+  position: relative; /* For potential pseudo-elements if needed later */
+}
+
+.footer p {
+  margin: 0.5rem 0;
+  letter-spacing: 0.3px;
+  transition:
+    color var(--transition-speed-medium) var(--transition-timing-function),
+    transform var(--transition-speed-medium) var(--transition-timing-function-bounce), /* Playful bounce */
+    text-shadow var(--transition-speed-medium) var(--transition-timing-function);
+  cursor: default; /* Indicate text is not typically interactive, but hover gives feedback */
+}
+
+/* Hover effect for the paragraph strings */
+.footer p:hover {
+  color: var(--nevada-accent-terracotta); /* Change text color to accent */
+  transform: translateY(-3px) scale(1.03);  /* Slight lift and scale up */
+  text-shadow:
+    0 2px 8px rgba(var(--nevada-accent-terracotta-rgb), 0.3), /* Softer, larger glow */
+    0 1px 2px rgba(var(--nevada-text-earth-rgb), 0.1);      /* Subtle grounding shadow */
+}
+
+/* The heart emoji will inherit the paragraph's color and hover effect */
+/* If you wanted the heart to always be a specific color, you'd need to wrap it in a <span> */
+
+/* Optional: If you add links later, style them consistently */
+.footer a {
+  color: var(--nevada-text-earth); /* Start with base text color */
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px; /* Space for underline */
+  border-bottom: 1px solid transparent; /* Prepare for hover underline */
+  transition:
+    color var(--transition-speed-fast) ease,
+    border-bottom-color var(--transition-speed-fast) ease;
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  color: var(--nevada-accent-terracotta);
+  border-bottom-color: var(--nevada-accent-terracotta);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.8rem 1.5rem;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+  }
+  .footer p:hover {
+    transform: translateY(-2px) scale(1.02); /* Slightly reduce effect on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  .footer p {
+    line-height: 1.6;
+  }
+}
