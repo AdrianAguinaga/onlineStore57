@@ -1,0 +1,212 @@
+/* Basic Reset & Font */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6; /* Improved readability */
+}
+
+/* NEVADA THEME: Warm Desert Landscape
+   - Background: Sandy beige, reminiscent of desert plains.
+   - Text: Dark earthy brown for strong readability and grounding.
+   - Accent/Hover: Terracotta/dusty orange, like sunset on red rocks or desert flora.
+*/
+
+:root {
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  /* Theme Colors */
+  --nevada-bg-sand: #f0e6d2;
+  --nevada-bg-sand-light: #f5ede0; /* Lighter shade for gradients/hovers */
+  --nevada-text-earth: #5d4037;
+  --nevada-accent-terracotta: #c67258;
+  --nevada-accent-terracotta-darker: #a95942; /* Darker for active/pressed states */
+  --nevada-border-subtle: #dcd0b8;
+
+  /* UI Elements */
+  --navbar-height: 60px; /* Example height */
+  --navbar-padding-y: 0.75rem;
+  --navbar-padding-x: 2.5rem;
+
+  /* Transitions */
+  --transition-speed-fast: 0.2s;
+  --transition-speed-normal: 0.3s;
+  --transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1); /* Smooth ease-in-out */
+
+  /* Shadows */
+  --shadow-soft: 0 4px 12px rgba(var(--nevada-text-earth-rgb, 93, 64, 55), 0.1);
+  --shadow-medium: 0 6px 16px rgba(var(--nevada-text-earth-rgb, 93, 64, 55), 0.12);
+  --shadow-strong: 0 2px 4px rgba(var(--nevada-text-earth-rgb, 93, 64, 55), 0.2); /* For text */
+
+  /* Helper for RGBA shadows from CSS vars */
+  --nevada-text-earth-rgb: 93, 64, 55;
+}
+
+body {
+  background-color: var(--nevada-bg-sand); /* Fallback */
+  background-image: linear-gradient(180deg, var(--nevada-bg-sand-light) 0%, var(--nevada-bg-sand) 100%);
+  color: var(--nevada-text-earth);
+  min-height: 100vh; /* Ensure gradient covers full viewport */
+}
+
+.navbar {
+  background-color: var(--nevada-bg-sand-light);
+  box-shadow: var(--shadow-soft);
+  padding: var(--navbar-padding-y) var(--navbar-padding-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid transparent; /* Placeholder for potential scrolled state */
+  transition:
+    background-color var(--transition-speed-normal) var(--transition-timing-function),
+    box-shadow var(--transition-speed-normal) var(--transition-timing-function),
+    border-color var(--transition-speed-normal) var(--transition-timing-function);
+}
+
+/* Optional: Slightly different style when scrolled */
+/*
+.navbar.scrolled {
+  background-color: rgba(245, 237, 224, 0.95);
+  backdrop-filter: blur(5px);
+  box-shadow: var(--shadow-medium);
+  border-bottom-color: var(--nevada-border-subtle);
+}
+*/
+
+.navbar-brand {
+  font-size: 1.6rem; /* Slightly larger */
+  font-weight: 700; /* Bolder */
+  color: var(--nevada-text-earth);
+  text-decoration: none;
+  letter-spacing: -0.5px; /* Tighten up for a modern feel */
+  text-shadow: 0 1px 1px rgba(var(--nevada-text-earth-rgb), 0.1);
+  transition: color var(--transition-speed-fast) ease, transform var(--transition-speed-fast) ease;
+}
+
+.navbar-brand a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus-visible {
+  color: var(--nevada-accent-terracotta);
+  transform: scale(1.03);
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 2rem; /* Increased gap for more breathing room */
+}
+
+.navbar-item {
+  color: var(--nevada-text-earth);
+  text-decoration: none;
+  padding: 0.6rem 0.25rem; /* Adjusted padding to work better with the underline */
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition:
+    color var(--transition-speed-fast) var(--transition-timing-function),
+    transform var(--transition-speed-fast) var(--transition-timing-function);
+  outline: none; /* Remove default outline, we'll use focus-visible */
+}
+
+.navbar-item:hover,
+.navbar-item:focus-visible {
+  color: var(--nevada-accent-terracotta);
+  transform: translateY(-2px); /* Subtle lift */
+}
+
+.navbar-item.active {
+  color: var(--nevada-accent-terracotta-darker);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(var(--nevada-text-earth-rgb), 0.15);
+}
+
+/* Underline effect */
+.navbar-item::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2.5px; /* Slightly thicker */
+  bottom: -3px; /* Adjusted position */
+  left: 0; /* Start from left */
+  background-color: var(--nevada-accent-terracotta);
+  border-radius: 1px; /* Softer edges for the underline */
+  transition: width var(--transition-speed-normal) var(--transition-timing-function);
+}
+
+.navbar-item:hover::after,
+.navbar-item:focus-visible::after,
+.navbar-item.active::after {
+  width: 100%; /* Full width on hover/active */
+}
+
+.navbar-item.active::after {
+  background-color: var(--nevada-accent-terracotta-darker);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem; /* Adjusted padding */
+    /* Consider adding a toggle button for mobile menu */
+  }
+
+  .navbar-brand {
+    margin-bottom: 1rem; /* Increased spacing */
+    font-size: 1.4rem;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.25rem; /* Tighter gap for list items */
+  }
+
+  .navbar-item {
+    width: 100%;
+    text-align: left;
+    padding: 0.85rem 1rem; /* Consistent padding */
+    border-radius: 4px; /* Add rounding for a button-like feel */
+    border-bottom: none; /* Remove individual borders, use hover/focus bg */
+    transition:
+      background-color var(--transition-speed-fast) var(--transition-timing-function),
+      color var(--transition-speed-fast) var(--transition-timing-function),
+      transform var(--transition-speed-fast) var(--transition-timing-function);
+  }
+
+  .navbar-item:hover,
+  .navbar-item:focus-visible {
+    background-color: var(--nevada-bg-sand); /* Use a lighter sand */
+    color: var(--nevada-accent-terracotta);
+    transform: translateX(5px) translateY(0); /* Slight indent */
+  }
+
+  .navbar-item.active {
+    background-color: var(--nevada-bg-sand);
+    color: var(--nevada-accent-terracotta-darker);
+    font-weight: 600; /* Slightly less bold for mobile active */
+  }
+
+  /* Hide desktop underline effect on mobile, rely on background change */
+  .navbar-item::after {
+    display: none;
+  }
+}
+
+/* Optional: Add focus-visible polyfill for older browsers if needed */
+/* For modern browsers, :focus-visible is well-supported */
+.navbar-item:focus {
+  outline: none; /* Ensure no default outline if :focus-visible is not supported by old browsers */
+}
